@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.jws.WebService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,13 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import utility.EligibiltyCheck;
 
-@WebServlet(urlPatterns= {"/eligiblemain"})
-public class Eligibility extends HttpServlet {
+@WebService(name= {"/eligiblemain"})
+public class Eligibility<HttpServletRequest, HttpServletResponse, RequestDispatcher> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 
 	String points=request.getParameter("points");
+	EligibiltyCheck eli =new EligibiltyCheck();
+	boolean spaceEligible=eli.checkQuizAnswer(points);
 	
 	if(false)
 	{
